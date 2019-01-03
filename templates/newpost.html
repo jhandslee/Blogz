@@ -23,13 +23,13 @@
 
 <hr />
 
-    {% if n_entry|length == 0 %}
+    {% if blogs|length == 0 %}
     <p>No Blog Entries Yet!</p>
     {% else %}
 
         <ul>
-            {% for x in n_entry %}
-            <li>{{ x.entry }} {{ x.body }}</li>
+            {% for x in blogs %}
+            <li>{{ x.entry }} <br /> {{ x.body }}</li>
             {% endfor %}
         </ul>
 

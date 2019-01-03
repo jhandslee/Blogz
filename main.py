@@ -21,16 +21,8 @@ class Blog(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-	if request.method == 'POST':
-		entry =	request.form['entry']
-		body = request.form['body']
-		n_entry = Blog(entry, body)
-		db.session.add(n_entry)
-		db.session.commit()
+	return redirect('/blog')
 
-	n_entry = Blog.query.filter().all()
-	return render_template('newpost.html', title="New Blog Entries", n_entry=n_entry)
-	
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
 
@@ -39,16 +31,16 @@ def blog():
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
-
 	if request.method == 'POST':
 		entry =	request.form['entry']
 		body = request.form['body']
 		n_entry = Blog(entry, body)
 		db.session.add(n_entry)
 		db.session.commit()
+		flash("Thanks for your entry")
 
-	n_entry = Blog.query.filter().all()
-	return render_template('newpost.html', title="New Blog Entries", n_entry=n_entry)
+	blogs = Blog.query.filter().all()
+	return render_template('newpost.html', title="New Blog Entries", blogs=blogs)
 
 if __name__ == '__main__':
 	app.run()
