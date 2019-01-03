@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<form action="/blog" method="POST">
+    <ul>
+        {% for x in n_entry %}
+        <li>{{x.entry}} <br /> {{x.body}} </li />
+        {% endfor %}
+    </ul>
+
+</form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<form method="POST" action="/newpost">
+	<table>
+        <tr>
+            <td><label for="b-entry">Blog Title</label></td>
+            <td>
+                <input id="b-entry" type="text" value="{{ entry }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="b-body">Blog Body</label></td>
+            <td>
+            	<textarea id="b-body" type="text" value="{{ body }}" maxlength="600">
+            	</textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+<hr />
+
+    {% if n_entry|length == 0 %}
+    <p>No Blog Entries Yet!</p>
+    {% else %}
+
+        <ul>
+            {% for x in n_entry %}
+            <li>{{ x.entry }} {{ x.body }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+{% endblock %}
