@@ -28,7 +28,7 @@
 
         <ul>
             {% for x in blogs %}
-            <li>{{ x.entry }} <br /> {{ x.body }}</li>
+            <li><a href="ipost?id={{x.id}}">{{ x.entry }}</a> <br /> {{ x.body }}</li>
             {% endfor %}
         </ul>
 

@@ -42,5 +42,12 @@ def newpost():
 	blogs = Blog.query.filter().all()
 	return render_template('newpost.html', title="New Blog Entries", blogs=blogs)
 
+@app.route('/ipost', methods=['POST', 'GET'])
+def ipost():
+	x_id = request.args.get("id")
+	bid = Blog.query.get(x_id)
+
+	return render_template("ipost.html", bid=bid)
+
 if __name__ == '__main__':
 	app.run()
