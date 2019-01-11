@@ -5,7 +5,7 @@
 <form action="/blog" method="POST">
     <ul>
         {% for x in n_entry %}
-        <li>{{x.entry}} <br /> {{x.body}} </li />
+        <li><b>{{x.entry}}</b> <br /> {{x.body}} </li />
         {% endfor %}
     </ul>
 
