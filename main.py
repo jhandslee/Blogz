@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:password@localhost:8889/blogz'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:password@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = '50-QXZ!6jD'
@@ -33,7 +33,7 @@ class User(db.Model):
 
 @app.before_request
 def require_login():
-	allowed_routes = ['login', 'register']
+	allowed_routes = ['login', 'signup', 'blog', 'index']
 	if request.endpoint not in allowed_routes and 'username' not in session:
 		return redirect('/login')
 
@@ -46,14 +46,14 @@ def login():
 		if user and user.password == password:
 			session['username'] = username
 			flash("logged in")
-			return redirect('/')
+			return redirect('/newpost')
 		else:
 			flash("User password incorrect, or user does not exist", 'error')
 
 	return render_template('login.html')
 
-@app.route('/register', methods=['POST', 'GET'])
-def register():
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
@@ -72,17 +72,18 @@ def register():
 			# TODO mesage
 			return '<h1>Duplicate user</h1>'
 
-	return render_template('register.html')
+	return render_template('signup.html')
 
 @app.route('/', methods=['POST', 'GET'])
-def index():
+def home():
 
-	return redirect('/blog')
+	return redirect('/index')
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-	
+
 	n_entry = Blog.query.filter().all()
+
 	return render_template('blog.html', title="Blog Entries", n_entry=n_entry)
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -104,10 +105,15 @@ def newpost():
 
 @app.route('/ipost', methods=['POST', 'GET'])
 def ipost():
-	x_id = request.args.get("id")
-	bid = Blog.query.get(x_id)
+	
+	n_entry = Blog.query.filter().all()
+	return render_template("ipost.html", title="User Posts", n_entry=n_entry)
 
-	return render_template("ipost.html", bid=bid)
+@app.route('/index', methods=['POST', 'GET'])
+def index():
+
+	entrys = User.query.filter().all()
+	return render_template("home.html", title="Site Users", entrys=entrys)
 
 @app.route('/logout')
 def logout():
