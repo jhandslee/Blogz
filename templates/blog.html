@@ -2,10 +2,10 @@
 
 {% block content %}
 <h1>{{title}}</h1>
-<form action="/blog" method="POST">
+<form action="/blog" method="['POST', 'GET']">
     <ul>
-        {% for x in n_entry %}
-        <li>{{ x.id }}, {{ x.owner_id }}, {{ x.owner }} <a href="ipost?id={{ x.id }}">{{ x.entry }}</a></b> <br /> {{x.body}} </li />
+        {% for x in blogs %}
+        <li>{{ x.id }}, {{ x.owner_id }}, {{ x.owner.username }} <a href="ipost?id={{x.id}}">{{ x.entry }}</a> <br /> {{ x.body }} </li>
         {% endfor %}
     </ul>
 

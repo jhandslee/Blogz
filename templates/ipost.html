@@ -2,13 +2,11 @@
 
 {% block content %}
 <h1>{{title}}</h1>
-<form action="/ipost" method="POST">
 
 	<ul>
-    	{% for x in n_entry %}
-        	<li>{{ x.entry }} <br /> {{ x.body }}</li>
+    	{% for id in blogs %}
+		<li>{{ id.owner_id }}, {{ id.entry }} <br /> {{ id.body }}</li>
        	{% endfor %}
 	</ul>
 
-</form>
 {% endblock %}

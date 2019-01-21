@@ -4,8 +4,8 @@
 <h1>{{title}}</h1>
 
 	<ul>
-		{% for u in u_entry %}
-		<li><a href="index?id={{ u.id }}">{{ bid.entry }}</a> <br /> {{ bid.body }}</li>
+		{% for u in blogs %}
+			<li><a href="ipost?id={{u.id}}">{{ u.owner.username }}</a><br /> {{ u.body }}</li>
 		{% endfor %}
 
 	</ul>

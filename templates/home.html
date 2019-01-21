@@ -4,8 +4,8 @@
 <h1>{{title}}</h1>
 <form action="/index" method="POST">
     <ul>
-        {% for u in entrys %}
-        <li><a href="index?id={{ u.id }}">{{ u.username }}</a></li />
+        {% for u in blogs %}
+        <li>{{ u.owner_id }}<a href="index?id={{u.owner_id}}?">{{ u.owner.username }} </a>
         {% endfor %}
     </ul>
 

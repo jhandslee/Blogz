@@ -77,14 +77,7 @@ def signup():
 @app.route('/', methods=['POST', 'GET'])
 def home():
 
-	return redirect('/index')
-
-@app.route('/blog', methods=['POST', 'GET'])
-def blog():
-
-	n_entry = Blog.query.filter().all()
-
-	return render_template('blog.html', title="Blog Entries", n_entry=n_entry)
+	return render_template('home.html', )
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
@@ -103,17 +96,32 @@ def newpost():
 
 	return render_template('newpost.html', title="New Blog Entries", blogs=blogs)
 
+@app.route('/blog', methods=['POST', 'GET'])
+def blog():
+	b_id = request.args.get('owner_id')
+	bid = Blog.query.get('b_id')
+
+	blogs = Blog.query.filter().all()
+
+	return render_template('blog.html', title="Blog Entries", blogs=blogs, bid=bid)
+
 @app.route('/ipost', methods=['POST', 'GET'])
 def ipost():
-	
-	n_entry = Blog.query.filter().all()
-	return render_template("ipost.html", title="User Posts", n_entry=n_entry)
+	o_id = request.args.get('owner_id')
+	oid = Blog.query.get('o_id')
+
+	blogs = Blog.query.filter().all()
+	return render_template("ipost.html", title="User Posts", blogs=blogs, oid=oid)
 
 @app.route('/index', methods=['POST', 'GET'])
 def index():
+	u_id = request.args.get("owner_id")
+	uid = Blog.query.get("o_id")
 
-	entrys = User.query.filter().all()
-	return render_template("home.html", title="Site Users", entrys=entrys)
+	blogs = Blog.query.filter().all()
+
+
+	return render_template("home.html", title="Users Blogs", blogs=blogs, uid=uid)
 
 @app.route('/logout')
 def logout():
