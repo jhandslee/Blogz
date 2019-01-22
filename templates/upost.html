@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+	<ul>
+    {% for x in powner %}
+    <li><a href="upost?id={{owner_id}}">{{ x.entry }}</a> <br /> {{ x.body }} </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

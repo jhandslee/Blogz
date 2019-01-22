@@ -5,7 +5,7 @@
 <form action="/blog" method="['POST', 'GET']">
     <ul>
         {% for x in blogs %}
-        <li>{{ x.id }}, {{ x.owner_id }}, {{ x.owner.username }} <a href="ipost?id={{x.id}}">{{ x.entry }}</a> <br /> {{ x.body }} </li>
+        <li><a href="ipost?id={{x.id}}">{{ x.entry }}</a> <br /> {{ x.body }} </li>
         {% endfor %}
     </ul>
 

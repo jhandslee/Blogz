@@ -3,10 +3,6 @@
 {% block content %}
 <h1>{{title}}</h1>
 
-	<ul>
-    	{% for id in blogs %}
-		<li>{{ id.owner_id }}, {{ id.entry }} <br /> {{ id.body }}</li>
-       	{% endfor %}
-	</ul>
+	{{post.entry}}, <br /> {{post.body}}
 
 {% endblock %}

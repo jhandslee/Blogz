@@ -2,12 +2,10 @@
 
 {% block content %}
 <h1>{{title}}</h1>
-<form action="/index" method="POST">
     <ul>
-        {% for u in blogs %}
-        <li>{{ u.owner_id }}<a href="index?id={{u.owner_id}}?">{{ u.owner.username }} </a>
+        {% for h in names %}
+        <li><a href="upost?id={{h.id}}">{{ h.username }}</a>
         {% endfor %}
     </ul>
 
-</form>
 {% endblock %}

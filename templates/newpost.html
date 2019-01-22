@@ -22,4 +22,16 @@
 
 <hr />
 
+    {% if blogs|length == 0 %}
+    <p>No Blog Entries Yet!</p>
+    {% else %}
+
+        <ul>
+            {% for x in blogs %}
+            <li><a href="ipost?id={{x.id}}">{{ x.entry }}</a> <br /> {{ x.body }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
 {% endblock %}
